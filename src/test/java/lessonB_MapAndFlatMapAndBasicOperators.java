@@ -27,7 +27,8 @@ public class lessonB_MapAndFlatMapAndBasicOperators {
     }
 
     /**
-     * the Map function transforms the items emitted by an Observable by applying a function to each, changing the content.
+     * the Map function transforms the items emitted by an Observable by applying a function to each,
+     * changing the content.
      */
     @Test
     public void mapAppliesAFunctionToEachItemAndEmitsDataOnTheOtherSide() {
@@ -35,9 +36,9 @@ public class lessonB_MapAndFlatMapAndBasicOperators {
                 .map(word -> word.replace("e", "3"))
                 .map(word -> word.replace("l", "1"))
                 .subscribe(mSubscriber);
-        assertThat(mSubscriber.getOnNextEvents()).contains(_____);
-        assertThat(mSubscriber.getOnNextEvents()).contains(_____);
-        assertThat(mSubscriber.getOnNextEvents()).contains(_____);
+        assertThat(mSubscriber.getOnNextEvents()).contains("k3w1");
+        assertThat(mSubscriber.getOnNextEvents()).contains("133t");
+        assertThat(mSubscriber.getOnNextEvents()).contains("sp3ak");
     }
 
     /**
@@ -86,12 +87,14 @@ public class lessonB_MapAndFlatMapAndBasicOperators {
         });
         map.subscribe(mSubscriber);
 
-        assertThat(mSubscriber.getOnNextEvents()).hasSize(____);
+        assertThat(mSubscriber.getOnNextEvents()).hasSize(2);
 
         /** Was the result above what you expected? A bit strange huh? You'd think that you'd get
          * a value matching the number of items of foods in each list at first glance.
-         * The reason we get a different result is because of the difference between map(), and flatmap(), which we will see next.
-         * map() will always keep the SAME NUMBER OF events/ data as the previous segment in the pipeline. It can never change the number
+         * The reason we get a different result is because of the difference between map(), and flatmap(),
+         * which we will see next.
+         * map() will always keep the SAME NUMBER OF events/ data as the previous segment in the pipeline.
+         * It can never change the number
          * of items on the previous piece of the pipeline.
 
          * Next, we would like to begin filtering the list to match what we can afford to eat.
@@ -114,7 +117,7 @@ public class lessonB_MapAndFlatMapAndBasicOperators {
             }
         });
         individualItemsObservable.subscribe(mSubscriber);
-        assertThat(mSubscriber.getOnNextEvents()).hasSize(____);
+        assertThat(mSubscriber.getOnNextEvents()).hasSize(11);
 
         mSubscriber = new TestSubscriber<>();
 
@@ -132,7 +135,7 @@ public class lessonB_MapAndFlatMapAndBasicOperators {
             }
         }).subscribe(mSubscriber);
 
-        assertThat(mSubscriber.getOnNextEvents()).hasSize(____);
+        assertThat(mSubscriber.getOnNextEvents()).hasSize(7);
 
         System.out.println("With my 5 bucks I can buy: " + mSubscriber.getOnNextEvents());
     }
@@ -158,7 +161,7 @@ public class lessonB_MapAndFlatMapAndBasicOperators {
         elevatorPassengersObservable.reduce(0, (accumulatedWeight, elevatorPassenger) ->
                 elevatorPassenger.mWeightInPounds += accumulatedWeight)
                 .subscribe(testSubscriber);
-        assertThat(testSubscriber.getOnNextEvents().get(0)).isEqualTo(____);
+        assertThat(testSubscriber.getOnNextEvents().get(0)).isEqualTo(850);
     }
 
 
@@ -172,7 +175,7 @@ public class lessonB_MapAndFlatMapAndBasicOperators {
 
         Observable<String> repeatingObservable = Observable.just(weapon).repeat(4);
         repeatingObservable.subscribe(subscriber);
-        assertThat(subscriber.getOnNextEvents()).hasSize(____);
+        assertThat(subscriber.getOnNextEvents()).hasSize(4);
 
         subscriber = new TestSubscriber<>();
         /**
@@ -180,7 +183,7 @@ public class lessonB_MapAndFlatMapAndBasicOperators {
          */
         Observable<String> challengeRepeatingObservable = repeatingObservable.repeat(4);
         challengeRepeatingObservable.subscribe(subscriber);
-        assertThat(subscriber.getOnNextEvents()).hasSize(____);
+        assertThat(subscriber.getOnNextEvents()).hasSize(16);
     }
 
 
@@ -201,8 +204,8 @@ public class lessonB_MapAndFlatMapAndBasicOperators {
                     }
                 })
                 .subscribe();
-        assertThat(mStringA).isEqualTo("____");
-        assertThat(mStringB).isEqualTo("____");
+        assertThat(mStringA).isEqualTo("123456");
+        assertThat(mStringB).isEqualTo("246");
     }
 
     /**
@@ -214,7 +217,7 @@ public class lessonB_MapAndFlatMapAndBasicOperators {
     public void convertingEvents() {
         mStringA = "";
         Observable.just("wE", "hOpe", "yOU", "aRe", "eNjOyInG", "thIS")
-                .map(s -> _____)
+                .map(s -> s.toLowerCase())
                 .subscribe(s -> mStringA += s + " ");
 
         assertThat(mStringA).isEqualTo("we hope you are enjoying this ");
